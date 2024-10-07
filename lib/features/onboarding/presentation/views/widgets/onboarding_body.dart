@@ -1,20 +1,37 @@
-import 'package:dalel/core/utilies/app_assest.dart';
+import 'package:dalel/core/functions/naviagation.dart';
+import 'package:dalel/core/route/app_route.dart';
 import 'package:dalel/core/utilies/app_colors.dart';
 import 'package:dalel/core/utilies/app_strings.dart';
 import 'package:dalel/core/widegts/custom_bt.dart';
+import 'package:dalel/features/onboarding/data_layer/modal/on_boarding_model.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:dalel/core/utilies/app_text_styles.dart';
 
-class OnboardingWidgetBody extends StatelessWidget {
+class OnboardingWidgetBody extends StatefulWidget {
   OnboardingWidgetBody({super.key});
-  final PageController pageController = PageController();
+
+  @override
+  State<OnboardingWidgetBody> createState() => _OnboardingWidgetBodyState();
+}
+
+class _OnboardingWidgetBodyState extends State<OnboardingWidgetBody> {
+  final PageController pageController = PageController(initialPage: 0);
+
+  int indexs = 0;
+
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return SizedBox(
+      height: 800,
       child: PageView.builder(
+        onPageChanged: (value) {
+          print(value);
+          setState(() {});
+          indexs = value;
+        },
         controller: pageController,
-        itemCount: 3,
+        itemCount: onboardingList.length,
         itemBuilder: (context, index) {
           return Column(
             children: [
@@ -24,9 +41,12 @@ class OnboardingWidgetBody extends StatelessWidget {
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(
-                          AppAssets.onBoarding1,
+                          onboardingList[index].imagePath,
                         ),
                         fit: BoxFit.fill)),
+              ),
+              SizedBox(
+                height: 28,
               ),
               SmoothPageIndicator(
                 controller: pageController,
@@ -39,7 +59,7 @@ class OnboardingWidgetBody extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Text(
-                  "Explore the history with dalel in a smart way ",
+                  onboardingList[index].title,
                   style: CustomTextStyles.poppins400style20
                       .copyWith(fontWeight: FontWeight.w800, fontSize: 22),
                 ),
@@ -47,9 +67,30 @@ class OnboardingWidgetBody extends StatelessWidget {
               SizedBox(
                 height: 40,
               ),
-              CustomButton(
-                text: AppStrings.next,
-              ),
+              (indexs == 2)
+                  ? Column(
+                      children: [
+                        TwoCustomButton(
+                          text: "sign Up ",
+                          onPressed: () {
+                            customNavigate(context, RouteName.signUpView);
+                          },
+                        )
+                      ],
+                    )
+                  : Column(
+                      children: [
+                        CustomButton(
+                          pageController: pageController,
+                          text: AppStrings.next,
+                        ),
+                        TextButton(
+                            onPressed: () {
+                              customNavigate(context, RouteName.Signin);
+                            },
+                            child: Text("Login now"))
+                      ],
+                    )
             ],
           );
         },
