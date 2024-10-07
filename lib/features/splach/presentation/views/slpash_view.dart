@@ -20,6 +20,7 @@ class _SplashViewState extends State<SplashView> {
   }
 
   void delyedNavigation() {
+    //////////////news
     Future.delayed(Duration(seconds: 3), () {
       customNavigate(context, RouteName.OnboardingView);
     });
