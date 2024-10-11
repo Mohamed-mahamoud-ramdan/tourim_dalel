@@ -29,6 +29,7 @@ class CustomButton extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class TwoCustomButton extends StatelessWidget {
   TwoCustomButton({super.key, this.color, required this.text, this.onPressed});
   final Color? color;

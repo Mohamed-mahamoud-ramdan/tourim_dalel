@@ -1,9 +1,12 @@
+import 'package:dalel/core/dataBases/cache_helper.dart';
 import 'package:dalel/core/functions/naviagation.dart';
 import 'package:dalel/core/route/app_route.dart';
+import 'package:dalel/core/services/services_loactor.dart';
 import 'package:dalel/core/utilies/app_colors.dart';
 import 'package:dalel/core/utilies/app_strings.dart';
 import 'package:dalel/core/widegts/custom_bt.dart';
 import 'package:dalel/features/onboarding/data_layer/modal/on_boarding_model.dart';
+import 'package:dalel/main.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:dalel/core/utilies/app_text_styles.dart';
@@ -64,7 +67,7 @@ class _OnboardingWidgetBodyState extends State<OnboardingWidgetBody> {
                       .copyWith(fontWeight: FontWeight.w800, fontSize: 22),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               (indexs == 2)
@@ -73,9 +76,14 @@ class _OnboardingWidgetBodyState extends State<OnboardingWidgetBody> {
                         TwoCustomButton(
                           text: "sign Up ",
                           onPressed: () {
-                            customNavigate(context, RouteName.signUpView);
+                            customNavigateRplace(context, RouteName.signUpView);
                           },
-                        )
+                        ),
+                        TextButton(
+                            onPressed: () {
+                              customNavigateRplace(context, RouteName.Signin);
+                            },
+                            child: Text("Login now"))
                       ],
                     )
                   : Column(
@@ -84,11 +92,6 @@ class _OnboardingWidgetBodyState extends State<OnboardingWidgetBody> {
                           pageController: pageController,
                           text: AppStrings.next,
                         ),
-                        TextButton(
-                            onPressed: () {
-                              customNavigate(context, RouteName.Signin);
-                            },
-                            child: Text("Login now"))
                       ],
                     )
             ],

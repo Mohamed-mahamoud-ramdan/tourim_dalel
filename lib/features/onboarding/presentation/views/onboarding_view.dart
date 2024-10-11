@@ -2,6 +2,7 @@ import 'package:dalel/features/onboarding/presentation/views/widgets/onboarding_
 import 'package:flutter/material.dart';
 
 class OnboardingView extends StatefulWidget {
+  // ignore: prefer_const_constructors_in_immutables
   OnboardingView({
     super.key,
   });

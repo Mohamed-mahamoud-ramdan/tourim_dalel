@@ -77,3 +77,6 @@ abstract class FireBaseStrings {
   static const String image = "image";
   static const String wars = "wars";
 }
+
+///////////////////sharedprefreces
+String isOnbardingvisited = "isOnbardingvisited";
